@@ -1,6 +1,7 @@
 // Импорт глобальных объектов из firebase-init.js
 import { db, auth } from './firebase-init.js';
-import { signInAnonymously } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js'; // Добавлен импорт
+import { signInAnonymously } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js';
+import { collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js'; // Добавлены импорты
 
 let currentLang = 'kk';
 let isAuthenticated = false; // Флаг авторизации
@@ -58,7 +59,7 @@ const resources = [
         category: 'Home_animal',
         age: '3-5',
         title: {kk: 'үй жануарлары pdf', en: 'Home Animals'},
-        desc: {kk: 'Үй жануарларын тануға арналған карточкалар.', en: 'Cards to help recognize home animals.'},
+        desc: {kk: 'Үй жануарлаryn тануға арналған карточкалар.', en: 'Cards to help recognize home animals.'},
         img: '/Bala-Edu/images/3.png',
         file: '/Bala-Edu/resources/Home_animal.pdf',
         downloads: 0
@@ -138,7 +139,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     resolve();
                 } else {
                     console.log("Attempting to authenticate...");
-                    signInAnonymously(auth) // Исправлен вызов с передачей auth
+                    signInAnonymously(auth)
                         .then((userCredential) => {
                             isAuthenticated = true;
                             console.log("Authentication succeeded:", userCredential.user.uid);
@@ -197,7 +198,7 @@ function logDownload(resourceId) {
         console.log("User state:", user);
         if (user) {
             console.log("User found, logging download...");
-            db.collection("downloads").add({
+            addDoc(collection(db, "downloads"), { // Исправлен вызов Firestore
                 userId: user.uid,
                 resourceId: resourceId,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
