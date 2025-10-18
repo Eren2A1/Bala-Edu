@@ -125,10 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Инициализация авторизации при загрузке страницы
+    // Инициализация авторизации с тестовыми точками
+    console.log("Starting authentication...");
     auth.signInAnonymously()
-        .then(() => console.log("User authenticated successfully"))
-        .catch(error => console.error("Auth error:", error));
+        .then((userCredential) => {
+            console.log("Authentication succeeded:", userCredential.user.uid);
+        })
+        .catch(error => {
+            console.error("Authentication failed:", error.code, error.message);
+        });
 });
 
 function filterResources() {
@@ -164,16 +169,21 @@ function downloadResource(id, file) {
 }
 
 function logDownload(resourceId) {
+    console.log("Checking user state before log...");
     auth.onAuthStateChanged(user => {
-        console.log("User state:", user); // Отладка
+        console.log("User state:", user); // Тестовая точка
         if (user) {
+            console.log("User found, logging download...");
             db.collection("downloads").add({
                 userId: user.uid,
                 resourceId: resourceId,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => console.log("Download logged")).catch(error => console.error("Error:", error));
+            }).then(() => console.log("Download logged")).catch(error => console.error("Firestore error:", error));
         } else {
-            console.log("No user authenticated");
+            console.log("No user authenticated, retrying auth...");
+            auth.signInAnonymously()
+                .then(() => logDownload(resourceId)) // Повторная попытка
+                .catch(error => console.error("Retry auth failed:", error));
         }
     });
 }
