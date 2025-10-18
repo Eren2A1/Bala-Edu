@@ -160,6 +160,7 @@ function downloadResource(id, file) {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        auth.signInAnonymously().catch(error => console.error("Auth error:", error));
         logDownload(id); // Вызываем запись в Firestore
     }
 }
@@ -177,3 +178,4 @@ function logDownload(resourceId) {
         }
     });
 }
+
