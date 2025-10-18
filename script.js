@@ -2,7 +2,7 @@
 import { db, auth } from './firebase-init.js';
 
 let currentLang = 'kk';
-let isAuthenticated = false; // Флаг для отслеживания авторизации
+let isAuthenticated = false; // Флаг авторизации
 
 const translations = {
     kk: {
@@ -109,7 +109,7 @@ function toggleMenu() {
 }
 
 // Добавляем обработчики событий
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     setLanguage('kk');
     filterResources();
 
@@ -126,15 +126,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // Инициализация авторизации с ожиданием
-    console.log("Starting authentication...");
-    try {
-        const userCredential = await auth.signInAnonymously();
-        isAuthenticated = true;
-        console.log("Authentication succeeded:", userCredential.user.uid);
-    } catch (error) {
-        console.error("Authentication failed:", error.code, error.message);
-    }
+    // Глобальный слушатель состояния авторизации
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            isAuthenticated = true;
+            console.log("User authenticated:", user.uid);
+        } else {
+            console.log("Waiting for authentication...");
+            auth.signInAnonymously()
+                .then((userCredential) => {
+                    isAuthenticated = true;
+                    console.log("Authentication succeeded:", userCredential.user.uid);
+                })
+                .catch(error => console.error("Authentication failed:", error.code, error.message));
+        }
+    });
 });
 
 function filterResources() {
@@ -165,8 +171,10 @@ function downloadResource(id, file) {
     if (resource) {
         resource.downloads++; // Увеличиваем счётчик
         document.getElementById(`downloads-${id}`).innerText = resource.downloads; // Обновляем отображение
+        // Открываем PDF в новой вкладке
+        window.open(file, '_blank');
         if (isAuthenticated) {
-            logDownload(id); // Записываем в Firestore только при успешной авторизации
+            logDownload(id); // Записываем в Firestore
         } else {
             console.log("Authentication not completed yet, skipping log...");
         }
@@ -176,7 +184,7 @@ function downloadResource(id, file) {
 function logDownload(resourceId) {
     console.log("Checking user state before log...");
     auth.onAuthStateChanged(user => {
-        console.log("User state:", user); // Тестовая точка
+        console.log("User state:", user);
         if (user) {
             console.log("User found, logging download...");
             db.collection("downloads").add({
@@ -185,7 +193,7 @@ function logDownload(resourceId) {
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => console.log("Download logged")).catch(error => console.error("Firestore error:", error));
         } else {
-            console.log("No user authenticated, please wait for authentication...");
+            console.log("No user authenticated, please wait...");
         }
     });
 }
