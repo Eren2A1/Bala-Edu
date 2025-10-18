@@ -1,9 +1,7 @@
-// Импорт необходимых модулей
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
-// Конфигурация Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyALRAoKyqYYp8CNTHjNp9cIYHcGfPDtV6o",
     authDomain: "digital-library-e6098.firebaseapp.com",
@@ -14,7 +12,6 @@ const firebaseConfig = {
     measurementId: "G-E3V8W8WQLB"
 };
 
-// Инициализация
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
