@@ -46,7 +46,7 @@ const resources = [
         category: 'fruit',
         age: '3-5',
         title: {kk: 'Жеміс-жидектер', en: 'Fruit'},
-        desc: {kk: 'Балаларға жемістерді тануға көмектесетін карточкалар.', en: 'Cards to help children recognize fruits.'}, // Исправлено с emotions на fruits
+        desc: {kk: 'Балаларға жемістерді тануға көмектесетін карточкалар.', en: 'Cards to help children recognize fruits.'},
         img: 'images/6.png',
         file: 'resources/Fruits.pdf',
         downloads: 0
@@ -56,7 +56,7 @@ const resources = [
         category: 'Home_animal',
         age: '3-5',
         title: {kk: 'үй жануарлары pdf', en: 'Home Animals'},
-        desc: {kk: 'Үй жануарларын тануға арналған карточкалар.', en: 'Cards to help recognize home animals.'}, // Исправлено с emotions
+        desc: {kk: 'Үй жануарларын тануға арналған карточкалар.', en: 'Cards to help recognize home animals.'},
         img: 'images/3.png',
         file: 'resources/Home_animal.pdf',
         downloads: 0
@@ -66,7 +66,7 @@ const resources = [
         category: 'Vegetables',
         age: '3-5',
         title: {kk: 'көкөністер', en: 'Vegetables'},
-        desc: {kk: 'Көкөністерді тануға арналған карточкалар.', en: 'Cards to help recognize vegetables.'}, // Исправлено с emotions
+        desc: {kk: 'Көкөністерді тануға арналған карточкалар.', en: 'Cards to help recognize vegetables.'},
         img: 'images/4.png',
         file: 'resources/Vegetables.pdf',
         downloads: 0
@@ -76,7 +76,7 @@ const resources = [
         category: 'language',
         age: '3-5',
         title: {kk: 'Alipi', en: 'Alipi'},
-        desc: {kk: 'Алифбаға арналған карточкалар.', en: 'Cards for learning the alphabet.'}, // Исправлено описание
+        desc: {kk: 'Алифбаға арналған карточкалар.', en: 'Cards for learning the alphabet.'},
         img: 'images/7.png',
         file: 'resources/Alipi.pdf',
         downloads: 0
@@ -86,7 +86,7 @@ const resources = [
         category: 'sandar',
         age: '3-5',
         title: {kk: 'Сандар', en: 'Numbers'},
-        desc: {kk: 'Сандарды тануға арналған карточкалар.', en: 'Cards for learning numbers.'}, // Исправлено описание
+        desc: {kk: 'Сандарды тануға арналған карточкалар.', en: 'Cards for learning numbers.'},
         img: 'images/10.png',
         file: 'resources/sandar.pdf',
         downloads: 0
@@ -144,8 +144,8 @@ function filterResources() {
                 <h3>${resource.title[currentLang]}</h3>
                 <p>${resource.desc[currentLang]}</p>
                 <p>Жас: ${resource.age} / Age: ${resource.age}</p>
-                <button data-id="${resource.id}">${currentLang === 'kk' ? 'Жүктеу' : 'Download'}</button>
-                <p>${currentLang === 'kk' ? 'Жүктеулер: ' : 'Downloads: '}<span id="downloads-${resource.id}">${resource.downloads}</span></p>
+                <button data-id="${resource.id}">${currentLang === 'kk' ? 'Қарау' : 'View'}</button> <!-- Изменил на "Қарау"/"View" -->
+                <p>${currentLang === 'kk' ? 'Қаралымдар: ' : 'Views: '}<span id="downloads-${resource.id}">${resource.downloads}</span></p>
             `;
             resourceList.appendChild(card);
         }
@@ -155,21 +155,15 @@ function filterResources() {
 function downloadResource(id, file) {
     let resource = resources.find(r => r.id === id);
     if (resource) {
-        resource.downloads++;
-        document.getElementById(`downloads-${id}`).innerText = resource.downloads;
-        const link = document.createElement('a');
-        link.href = file;
-        link.download = file.split('/').pop();
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        logDownload(id); // Вызываем запись после скачивания
+        resource.downloads++; // Увеличиваем счётчик
+        document.getElementById(`downloads-${id}`).innerText = resource.downloads; // Обновляем отображение
+        logDownload(id); // Записываем в Firestore
     }
 }
 
 function logDownload(resourceId) {
     auth.onAuthStateChanged(user => {
-        console.log("User state:", user); // Добавляем для отладки
+        console.log("User state:", user); // Отладка
         if (user) {
             db.collection("downloads").add({
                 userId: user.uid,
@@ -181,5 +175,3 @@ function logDownload(resourceId) {
         }
     });
 }
-
-
