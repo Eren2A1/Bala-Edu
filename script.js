@@ -154,8 +154,13 @@ function downloadResource(id, file) {
     if (resource) {
         resource.downloads++;
         document.getElementById(`downloads-${id}`).innerText = resource.downloads;
-        window.open(file, '_blank');
-        logDownload(id);
+        const link = document.createElement('a');
+        link.href = file;
+        link.download = file.split('/').pop();
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        logDownload(id); // Вызываем запись в Firestore
     }
 }
 
@@ -166,7 +171,9 @@ function logDownload(resourceId) {
                 userId: user.uid,
                 resourceId: resourceId,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => console.log("Download logged")).catch(console.error);
+            }).then(() => console.log("Download logged")).catch(error => console.error("Error:", error));
+        } else {
+            console.log("No user authenticated");
         }
     });
 }
