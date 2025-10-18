@@ -28,8 +28,8 @@ const resources = [
         age: '3-5',
         title: {kk: 'Эмоцияларды тану', en: 'Recognizing Emotions'},
         desc: {kk: 'Балаларға эмоцияларды ажыратуға көмектесетін карточкалар.', en: 'Cards to help children distinguish emotions.'},
-        img: 'images/12.png',
-        file: 'resources/emotion.pdf',
+        img: '/Bala-Edu/images/12.png', // Исправлен путь
+        file: '/Bala-Edu/resources/emotion.pdf', // Исправлен путь
         downloads: 0
     },
     {
@@ -38,8 +38,8 @@ const resources = [
         age: '3-5',
         title: {kk: 'Түстерді үйренеміз', en: 'Learning Colors'},
         desc: {kk: 'Негізгі түстерді тануға арналган тапсырмалар.', en: 'Tasks to recognize basic colors.'},
-        img: 'images/8.png',
-        file: 'resources/Colours.pdf',
+        img: '/Bala-Edu/images/8.png', // Исправлен путь
+        file: '/Bala-Edu/resources/Colours.pdf', // Исправлен путь
         downloads: 0
     },
     {
@@ -48,8 +48,8 @@ const resources = [
         age: '3-5',
         title: {kk: 'Жеміс-жидектер', en: 'Fruit'},
         desc: {kk: 'Балаларға жемістерді тануға көмектесетін карточкалар.', en: 'Cards to help children recognize fruits.'},
-        img: 'images/6.png',
-        file: 'resources/Fruits.pdf',
+        img: '/Bala-Edu/images/6.png', // Исправлен путь
+        file: '/Bala-Edu/resources/Fruits.pdf', // Исправлен путь
         downloads: 0
     },
     {
@@ -58,8 +58,8 @@ const resources = [
         age: '3-5',
         title: {kk: 'үй жануарлары pdf', en: 'Home Animals'},
         desc: {kk: 'Үй жануарларын тануға арналған карточкалар.', en: 'Cards to help recognize home animals.'},
-        img: 'images/3.png',
-        file: 'resources/Home_animal.pdf',
+        img: '/Bala-Edu/images/3.png', // Исправлен путь
+        file: '/Bala-Edu/resources/Home_animal.pdf', // Исправлен путь
         downloads: 0
     },
     {
@@ -68,8 +68,8 @@ const resources = [
         age: '3-5',
         title: {kk: 'көкөністер', en: 'Vegetables'},
         desc: {kk: 'Көкөністерді тануға арналған карточкалар.', en: 'Cards to help recognize vegetables.'},
-        img: 'images/4.png',
-        file: 'resources/Vegetables.pdf',
+        img: '/Bala-Edu/images/4.png', // Исправлен путь
+        file: '/Bala-Edu/resources/Vegetables.pdf', // Исправлен путь
         downloads: 0
     },
     {
@@ -78,8 +78,8 @@ const resources = [
         age: '3-5',
         title: {kk: 'Alipi', en: 'Alipi'},
         desc: {kk: 'Алифбаға арналған карточкалар.', en: 'Cards for learning the alphabet.'},
-        img: 'images/7.png',
-        file: 'resources/Alipi.pdf',
+        img: '/Bala-Edu/images/7.png', // Исправлен путь
+        file: '/Bala-Edu/resources/Alipi.pdf', // Исправлен путь
         downloads: 0
     },
     {
@@ -88,8 +88,8 @@ const resources = [
         age: '3-5',
         title: {kk: 'Сандар', en: 'Numbers'},
         desc: {kk: 'Сандарды тануға арналған карточкалар.', en: 'Cards for learning numbers.'},
-        img: 'images/10.png',
-        file: 'resources/sandar.pdf',
+        img: '/Bala-Edu/images/10.png', // Исправлен путь
+        file: '/Bala-Edu/resources/sandar.pdf', // Исправлен путь
         downloads: 0
     }
 ];
@@ -127,12 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Глобальный слушатель состояния авторизации
+    console.log("Starting authentication check...");
     auth.onAuthStateChanged(user => {
         if (user) {
             isAuthenticated = true;
             console.log("User authenticated:", user.uid);
         } else {
-            console.log("Waiting for authentication...");
+            console.log("Attempting to authenticate...");
             auth.signInAnonymously()
                 .then((userCredential) => {
                     isAuthenticated = true;
@@ -172,7 +173,7 @@ function downloadResource(id, file) {
         resource.downloads++; // Увеличиваем счётчик
         document.getElementById(`downloads-${id}`).innerText = resource.downloads; // Обновляем отображение
         // Открываем PDF в новой вкладке
-        window.open(file, '_blank');
+        window.open(file, '_blank', 'noopener,noreferrer'); // Добавлены параметры для безопасности
         if (isAuthenticated) {
             logDownload(id); // Записываем в Firestore
         } else {
