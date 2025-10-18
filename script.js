@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('category-select').addEventListener('change', filterResources);
     document.getElementById('age-select').addEventListener('change', filterResources);
 
-    // Обработчик для кнопок скачивания
+    // Обработчик для кнопок просмотра
     document.getElementById('resource-list').addEventListener('click', (event) => {
         if (event.target.tagName === 'BUTTON') {
             const resourceId = event.target.dataset.id;
@@ -126,7 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Инициализация авторизации при загрузке страницы
-    auth.signInAnonymously().catch(error => console.error("Auth error:", error));
+    auth.signInAnonymously()
+        .then(() => console.log("User authenticated successfully"))
+        .catch(error => console.error("Auth error:", error));
 });
 
 function filterResources() {
@@ -144,7 +146,7 @@ function filterResources() {
                 <h3>${resource.title[currentLang]}</h3>
                 <p>${resource.desc[currentLang]}</p>
                 <p>Жас: ${resource.age} / Age: ${resource.age}</p>
-                <button data-id="${resource.id}">${currentLang === 'kk' ? 'Қарау' : 'View'}</button> <!-- Изменил на "Қарау"/"View" -->
+                <button data-id="${resource.id}">${currentLang === 'kk' ? 'Қарау' : 'View'}</button>
                 <p>${currentLang === 'kk' ? 'Қаралымдар: ' : 'Views: '}<span id="downloads-${resource.id}">${resource.downloads}</span></p>
             `;
             resourceList.appendChild(card);
