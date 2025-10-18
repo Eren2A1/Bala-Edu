@@ -1,5 +1,6 @@
 // Импорт глобальных объектов из firebase-init.js
 import { db, auth } from './firebase-init.js';
+import { signInAnonymously } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js'; // Добавлен импорт
 
 let currentLang = 'kk';
 let isAuthenticated = false; // Флаг авторизации
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     resolve();
                 } else {
                     console.log("Attempting to authenticate...");
-                    auth.signInAnonymously()
+                    signInAnonymously(auth) // Исправлен вызов с передачей auth
                         .then((userCredential) => {
                             isAuthenticated = true;
                             console.log("Authentication succeeded:", userCredential.user.uid);
