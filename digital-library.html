@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital кітапхана - Bala Edu Project</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="script.js" defer></script>
+</head>
+<body>
+    <header class="fade-in">
+        <h1 id="header-title">Bala Edu Project</h1>
+        <div id="burger-menu" onclick="toggleMenu()">≡</div>
+        <nav id="nav-menu" class="hidden">
+            <a href="index.html">Басты бет</a>
+            <a href="team.html">Біздің команда</a>
+            <a href="mission.html">Миссия</a>
+            <a href="play-lab.html">Play Lab сабақтары</a>
+            <a href="digital-library.html">Digital кітапхана</a>
+            <a href="parent-guides.html">Ата-аналар үшін гайдтар</a>
+            <a href="speech-lab.html">Speech Lab</a>
+            <a href="kinder-lab.html">Kinder Lab</a>
+            <a href="feedback.html">Кері байланыс пен көмек</a>
+        </nav>
+        <div id="language-select">
+            <button onclick="setLanguage('kk')">Қазақша</button>
+            <button onclick="setLanguage('en')">English</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="digital-library">
+            <h2 id="library-title">Digital кітапхана</h2>
+            <p id="library-desc">Балалардың дамуын қызықты әрі қолжетімді етеміз! Мұнда сіз жас ерекшеліктеріне сай ойындар мен карточкаларды тегін жүктей аласыз.</p>
+            <button id="view-resources">Қарау</button>
+
+            <div id="filters">
+                <select id="category-select">
+                    <option value="all">Барлығы</option>
+                    <option value="emotions">Эмоциялар әлемі 💛</option>
+                    <option value="colors">Түстер мен пішіндер 🎨</option>
+                    <option value="fruit">Жеміс-жидектер 🌿</option>
+                    <option value="Home_animal">үй жануарлары 🔢</option>
+                    <option value="Vegetables">көкөністер 🗣</option>
+                    <option value="language">Қазақ тілі 🎭</option>
+                    <option value="sandar">Сандар 🎭</option>
+                </select>
+                <select id="age-select">
+                    <option value="all">Барлық жас</option>
+                    <option value="3-5">3–5 жас</option>
+                    <option value="5-6">5–6 жас</option>
+                </select>
+            </div>
+
+            <div id="resource-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p id="footer-text">© 2025. Bala Edu Project. Балалардың дамуы үшін</p>
+    </footer>
+</body>
+</html>

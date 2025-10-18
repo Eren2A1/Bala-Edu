@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bala Edu Project</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
+</head>
+<body>
+    <header class="fade-in">
+        <h1 id="header-title">Bala Edu Project</h1>
+        <div id="burger-menu" onclick="toggleMenu()">≡</div>
+        <nav id="nav-menu" class="hidden">
+            <a href="team.html">Біздің команда</a>
+            <a href="mission.html">Миссия</a>
+            <a href="play-lab.html">Play Lab сабақтары</a>
+            <a href="digital-library.html">Digital кітапхана</a>
+            <a href="parent-guides.html">Ата-аналар үшін гайдтар</a>
+            <a href="speech-lab.html">Speech Lab</a>
+            <a href="kinder-lab.html">Kinder Lab</a>
+            <a href="feedback.html">Кері байланыс пен көмек</a>
+        </nav>
+        <div id="language-select">
+            <button onclick="setLanguage('kk')">Қазақша</button>
+            <button onclick="setLanguage('en')">English</button>
+        </div>
+        <p id="header-desc">39,000+ дамытушы ойындар мен тапсырмалар 2-11 жас аралығындағы балалар үшін</p>
+        <audio id="hello-audio" src="audio/hello.mp3"></audio>
+    </header>
+
+    <main>
+        <p>Балалардың ойын арқылы дамуы</p>
+        <!-- Здесь можно добавить общий контент главной -->
+    </main>
+
+    <footer>
+        <p id="footer-text">© 2025. Bala Edu Project. Балалардың дамуы үшін</p>
+    </footer>
+</body>
+</html>
