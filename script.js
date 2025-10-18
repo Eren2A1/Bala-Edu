@@ -2,6 +2,7 @@
 import { db, auth } from './firebase-init.js';
 
 let currentLang = 'kk';
+let isAuthenticated = false; // Флаг для отслеживания авторизации
 
 const translations = {
     kk: {
@@ -108,7 +109,7 @@ function toggleMenu() {
 }
 
 // Добавляем обработчики событий
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     setLanguage('kk');
     filterResources();
 
@@ -125,15 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Инициализация авторизации с тестовыми точками
+    // Инициализация авторизации с ожиданием
     console.log("Starting authentication...");
-    auth.signInAnonymously()
-        .then((userCredential) => {
-            console.log("Authentication succeeded:", userCredential.user.uid);
-        })
-        .catch(error => {
-            console.error("Authentication failed:", error.code, error.message);
-        });
+    try {
+        const userCredential = await auth.signInAnonymously();
+        isAuthenticated = true;
+        console.log("Authentication succeeded:", userCredential.user.uid);
+    } catch (error) {
+        console.error("Authentication failed:", error.code, error.message);
+    }
 });
 
 function filterResources() {
@@ -164,7 +165,11 @@ function downloadResource(id, file) {
     if (resource) {
         resource.downloads++; // Увеличиваем счётчик
         document.getElementById(`downloads-${id}`).innerText = resource.downloads; // Обновляем отображение
-        logDownload(id); // Записываем в Firestore
+        if (isAuthenticated) {
+            logDownload(id); // Записываем в Firestore только при успешной авторизации
+        } else {
+            console.log("Authentication not completed yet, skipping log...");
+        }
     }
 }
 
@@ -180,10 +185,7 @@ function logDownload(resourceId) {
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             }).then(() => console.log("Download logged")).catch(error => console.error("Firestore error:", error));
         } else {
-            console.log("No user authenticated, retrying auth...");
-            auth.signInAnonymously()
-                .then(() => logDownload(resourceId)) // Повторная попытка
-                .catch(error => console.error("Retry auth failed:", error));
+            console.log("No user authenticated, please wait for authentication...");
         }
     });
 }
