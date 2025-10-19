@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кері байланыс пен көмек - Bala Edu Project</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E3V8W8WQLB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-E3V8W8WQLB');
+    </script>
+    <!-- Конец Google Analytics -->
+</head>
+<body>
+    <header class="fade-in">
+        <h1 id="header-title">Bala Edu Project</h1>
+        <div id="burger-menu" onclick="toggleMenu()">≡</div>
+        <nav id="nav-menu" class="hidden">
+            <a href="index.html">Басты бет</a>
+            <a href="team.html">Біздің команда</a>
+            <a href="mission.html">Миссия</a>
+            <a href="play-lab.html">Play Lab сабақтары</a>
+            <a href="digital-library.html">Digital кітапхана</a>
+            <a href="parent-guides.html">Ата-аналар үшін гайдтар</a>
+            <a href="speech-lab.html">Speech Lab</a>
+            <a href="kinder-lab.html">Kinder Lab</a>
+            <a href="feedback.html">Кері байланыс пен көмек</a>
+        </nav>
+        <div id="language-select">
+            <button onclick="setLanguage('kk')">Қазақша</button>
+            <button onclick="setLanguage('en')">English</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="feedback">
+            <h2>Кері байланыс пен көмек</h2>
+            <p>Оставьте свой отзыв или задайте вопрос — мы рады вашей помощи!</p>
+            <form>
+                <label for="name">Атыңыз (Имя):</label><br>
+                <input type="text" id="name" name="name" required><br>
+                <label for="message">Хабарлама (Сообщение):</label><br>
+                <textarea id="message" name="message" required></textarea><br>
+                <button type="submit">Жіберу (Отправить)</button>
+            </form>
+            <p>Свяжитесь с нами: <a href="mailto:support@balaedu.kz">support@balaedu.kz</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p id="footer-text">© 2025. Bala Edu Project. Балалардың дамуы үшін</p>
+    </footer>
+
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="script.js" defer></script>
+</body>
+</html>
