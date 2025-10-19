@@ -88,3 +88,54 @@
         }
 
         // Функция для проверки цвета
+        function checkColor(selected) {
+            const feedback = document.getElementById('color-feedback');
+            if (selected === correctColor) {
+                feedback.textContent = 'Дұрыс! 🎉 Тағы да ойнайық! (Правильно! Давай ещё!)';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Қате! Тағы тырысыңыз! (Неверно! Попробуй ещё!)';
+                feedback.style.color = 'red';
+            }
+            setRandomColor(); // Новый цвет после ответа
+        }
+
+        // Функция для рандомизации животного
+        function setRandomAnimal() {
+            const animals = ['cat', 'dog', 'bird'];
+            correctAnimal = animals[Math.floor(Math.random() * animals.length)];
+            const animalNames = { 'cat': 'Мысық (Кот)', 'dog': 'Ит (Собака)', 'bird': 'Құс (Птица)' };
+            document.getElementById('animal-question').textContent = `Бұл қай жануар? (${animalNames[correctAnimal]}?)`;
+        }
+
+        // Функция для проверки животного
+        function checkAnimal(selected) {
+            const feedback = document.getElementById('animal-feedback');
+            if (selected === correctAnimal) {
+                feedback.textContent = 'Дұрыс! 🎉 Тағы да ойнайық! (Правильно! Давай ещё!)';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Қате! Тағы тырысыңыз! (Неверно! Попробуй ещё!)';
+                feedback.style.color = 'red';
+            }
+            setRandomAnimal(); // Новое животное после ответа
+        }
+
+        // Инициализация игр при загрузке
+        window.onload = function() {
+            setRandomColor();
+            setRandomAnimal();
+        };
+
+        // Функции для переключения языка и меню
+        function setLanguage(lang) {
+            // Здесь можно добавить логику для переключения текста
+            console.log('Язык изменён на:', lang);
+        }
+
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
