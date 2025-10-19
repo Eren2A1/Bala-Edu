@@ -1,0 +1,121 @@
+/* Общие стили для digital-library */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f0e7; /* Айвори фон */
+    margin: 0;
+    padding: 0;
+    color: #4a2c2a; /* Тёмно-коричневый текст */
+}
+
+header, footer {
+    background-color: #8b5e3c; /* Коричневый акцент */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+#language-select button {
+    background-color: #d9b38c; /* Светло-коричневый */
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#language-select button:hover {
+    background-color: #c79d6e;
+}
+
+#digital-library {
+    padding: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px; /* Мягкие формы */
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card h3 {
+    color: #8b5e3c; /* Коричневый акцент */
+    margin-top: 0;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.card p {
+    margin: 10px 0;
+}
+
+button {
+    background-color: #d9b38c; /* Светло-коричневый */
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #c79d6e;
+}
+
+#feedback {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #8b5e3c;
+}
+
+#filters {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#filters select {
+    padding: 5px;
+    margin: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #d9b38c;
+}
+
+#view-resources {
+    background-color: #8b5e3c;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+}
+
+#view-resources:hover {
+    background-color: #704b2c;
+}
