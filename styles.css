@@ -52,12 +52,6 @@ nav a:hover {
 
 .game-card h3 {
     color: #8b5e3c; /* Коричневый акцент */
-    display: flex;
-    align-items: center;
-}
-
-.game-card h3 i {
-    margin-right: 10px;
 }
 
 button {
@@ -68,12 +62,6 @@ button {
     border-radius: 5px;
     cursor: pointer;
     color: white;
-    display: flex;
-    align-items: center;
-}
-
-button i {
-    margin-right: 5px;
 }
 
 button:hover {
@@ -94,12 +82,4 @@ button:hover {
 
 button:active {
     animation: bounce 0.5s;
-}
-
-/* Адаптивность */
-@media (max-width: 600px) {
-    button {
-        width: 100%;
-        margin: 5px 0;
-    }
 }
