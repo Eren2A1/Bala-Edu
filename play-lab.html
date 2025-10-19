@@ -6,7 +6,6 @@
     <title>Play Lab сабақтары - Bala Edu Project</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-E3V8W8WQLB"></script>
     <script>
@@ -45,42 +44,22 @@
 
             <!-- Игра с цветами -->
             <div id="color-game" class="game-card">
-                <h3><i class="fas fa-palette"></i> Таңдаңыз: Түс табыңыз! (Выбери цвет!)</h3>
-                <p id="color-question">Қайсысы <span id="correct-color"></span>? (Какой <span id="correct-color-en"></span>?)</p>
-                <button onclick="checkColor('red')"><i class="fas fa-circle" style="color: red;"></i> Қызыл (Красный)</button>
-                <button onclick="checkColor('blue')"><i class="fas fa-circle" style="color: blue;"></i> Көк (Синий)</button>
-                <button onclick="checkColor('green')"><i class="fas fa-circle" style="color: green;"></i> Жасыл (Зелёный)</button>
+                <h3>Таңдаңыз: Түс табыңыз! (Выбери цвет!)</h3>
+                <p id="color-question">Қайсысы <span id="correct-color">қызыл</span>? (Какой <span id="correct-color-en">red</span>?)</p>
+                <button onclick="checkColor('red')">Қызыл (Красный)</button>
+                <button onclick="checkColor('blue')">Көк (Синий)</button>
+                <button onclick="checkColor('green')">Жасыл (Зелёный)</button>
                 <p id="color-feedback">Нәтиже көрсетіледі! (Результат появится!)</p>
             </div>
 
             <!-- Игра с животными -->
             <div id="animal-game" class="game-card">
-                <h3><i class="fas fa-paw"></i> Таңдаңыз: Жануар табыңыз! (Выбери животное!)</h3>
+                <h3>Таңдаңыз: Жануар табыңыз! (Выбери животное!)</h3>
                 <p id="animal-question">Бұл қай жануар? (Какое животное?)</p>
-                <button onclick="checkAnimal('cat')"><i class="fas fa-cat"></i> Мысық (Кот)</button>
-                <button onclick="checkAnimal('dog')"><i class="fas fa-dog"></i> Ит (Собака)</button>
-                <button onclick="checkAnimal('bird')"><i class="fas fa-dove"></i> Құс (Птица)</button>
+                <button onclick="checkAnimal('cat')">Мысық (Кот)</button>
+                <button onclick="checkAnimal('dog')">Ит (Собака)</button>
+                <button onclick="checkAnimal('bird')">Құс (Птица)</button>
                 <p id="animal-feedback">Нәтиже көрсетіледі! (Результат появится!)</p>
-            </div>
-
-            <!-- Игра с фруктами -->
-            <div id="fruit-game" class="game-card">
-                <h3><i class="fas fa-apple-alt"></i> Санаңыз: Фрукт табыңыз! (Считай фрукты!)</h3>
-                <p id="fruit-question">Қанша алма бар? (Сколько яблок?)</p>
-                <button onclick="checkFruit(3)"><i class="fas fa-apple-alt"></i> 3</button>
-                <button onclick="checkFruit(5)"><i class="fas fa-apple-alt"></i> 5</button>
-                <button onclick="checkFruit(2)"><i class="fas fa-apple-alt"></i> 2</button>
-                <p id="fruit-feedback">Нәтиже көрсетіледі! (Результат появится!)</p>
-            </div>
-
-            <!-- Игра с формами -->
-            <div id="shape-game" class="game-card">
-                <h3><i class="fas fa-shapes"></i> Таңдаңыз: Форма табыңыз! (Выбери форму!)</h3>
-                <p id="shape-question">Бұл қай форма? (Какая форма?)</p>
-                <button onclick="checkShape('circle')"><i class="far fa-circle"></i> Дөңгелек (Круг)</button>
-                <button onclick="checkShape('square')"><i class="fas fa-square"></i> Төртбұрыш (Квадрат)</button>
-                <button onclick="checkShape('triangle')"><i class="fas fa-play"></i> Үшбұрыш (Треугольник)</button>
-                <p id="shape-feedback">Нәтиже көрсетіледі! (Результат появится!)</p>
             </div>
 
             <p>Больше игр и материалов ждёт в <a href="digital-library.html">Digital кітапхана</a>!</p>
@@ -97,14 +76,12 @@
         // Переменные для игр
         let correctColor = 'red';
         let correctAnimal = 'cat';
-        let correctFruitCount = 3;
-        let correctShape = 'circle';
 
         // Функция для рандомизации цвета
         function setRandomColor() {
             const colors = ['red', 'blue', 'green'];
             correctColor = colors[Math.floor(Math.random() * colors.length)];
-            const colorNames = { 'red': 'Қызыл', 'blue': 'Көк', 'green': 'Жасыл' };
+            const colorNames = { 'red': 'Қызыл (Красный)', 'blue': 'Көк (Синий)', 'green': 'Жасыл (Зелёный)' };
             const colorNamesEn = { 'red': 'red', 'blue': 'blue', 'green': 'green' };
             document.getElementById('correct-color').textContent = colorNames[correctColor];
             document.getElementById('correct-color-en').textContent = colorNamesEn[correctColor];
@@ -127,7 +104,7 @@
         function setRandomAnimal() {
             const animals = ['cat', 'dog', 'bird'];
             correctAnimal = animals[Math.floor(Math.random() * animals.length)];
-            const animalNames = { 'cat': 'Мысық', 'dog': 'Ит', 'bird': 'Құс' };
+            const animalNames = { 'cat': 'Мысық (Кот)', 'dog': 'Ит (Собака)', 'bird': 'Құс (Птица)' };
             document.getElementById('animal-question').textContent = `Бұл қай жануар? (${animalNames[correctAnimal]}?)`;
         }
 
@@ -144,53 +121,10 @@
             setRandomAnimal();
         }
 
-        // Функция для рандомизации фруктов
-        function setRandomFruit() {
-            const fruitCounts = [2, 3, 5];
-            correctFruitCount = fruitCounts[Math.floor(Math.random() * fruitCounts.length)];
-            document.getElementById('fruit-question').textContent = `Қанша алма бар? (${correctFruitCount}?)`;
-        }
-
-        // Функция для проверки фруктов
-        function checkFruit(selected) {
-            const feedback = document.getElementById('fruit-feedback');
-            if (selected === correctFruitCount) {
-                feedback.textContent = 'Дұрыс! 🎉 Тағы да ойнайық! (Правильно! Давай ещё!)';
-                feedback.style.color = 'green';
-            } else {
-                feedback.textContent = 'Қате! Тағы тырысыңыз! (Неверно! Попробуй ещё!)';
-                feedback.style.color = 'red';
-            }
-            setRandomFruit();
-        }
-
-        // Функция для рандомизации формы
-        function setRandomShape() {
-            const shapes = ['circle', 'square', 'triangle'];
-            correctShape = shapes[Math.floor(Math.random() * shapes.length)];
-            const shapeNames = { 'circle': 'Дөңгелек', 'square': 'Төртбұрыш', 'triangle': 'Үшбұрыш' };
-            document.getElementById('shape-question').textContent = `Бұл қай форма? (${shapeNames[correctShape]}?)`;
-        }
-
-        // Функция для проверки формы
-        function checkShape(selected) {
-            const feedback = document.getElementById('shape-feedback');
-            if (selected === correctShape) {
-                feedback.textContent = 'Дұрыс! 🎉 Тағы да ойнайық! (Правильно! Давай ещё!)';
-                feedback.style.color = 'green';
-            } else {
-                feedback.textContent = 'Қате! Тағы тырысыңыз! (Неверно! Попробуй ещё!)';
-                feedback.style.color = 'red';
-            }
-            setRandomShape();
-        }
-
         // Инициализация игр при загрузке
         window.onload = function() {
             setRandomColor();
             setRandomAnimal();
-            setRandomFruit();
-            setRandomShape();
         };
 
         // Функции для переключения языка и меню
