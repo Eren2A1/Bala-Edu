@@ -42,7 +42,7 @@ nav a:hover {
     background-color: #c79d6e;
 }
 
-#color-game {
+.card {
     background-color: white;
     border-radius: 10px; /* Мягкие формы */
     padding: 20px;
@@ -50,7 +50,7 @@ nav a:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#color-game h3 {
+.card h3 {
     color: #8b5e3c; /* Коричневый акцент */
 }
 
@@ -68,18 +68,7 @@ button:hover {
     background-color: #c79d6e;
 }
 
-#color-feedback {
+#feedback {
     font-weight: bold;
     margin-top: 10px;
-}
-
-/* Анимация для интерактивности */
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-    40% {transform: translateY(-10px);}
-    60% {transform: translateY(-5px);}
-}
-
-button:active {
-    animation: bounce 0.5s;
 }
