@@ -42,17 +42,26 @@
             <h2>Play Lab сабақтары</h2>
             <p>Добро пожаловать в Play Lab — место, где дети учатся через игру! Попробуй задания ниже.</p>
 
-            <!-- Интерактивное задание: Выбор цвета -->
-            <div id="color-game">
+            <!-- Игра с цветами -->
+            <div id="color-game" class="game-card">
                 <h3>Таңдаңыз: Түс табыңыз! (Выбери цвет!)</h3>
-                <p>Қайсысы қызыл? (Какой красный?)</p>
+                <p id="color-question">Қайсысы <span id="correct-color">қызыл</span>? (Какой <span id="correct-color-en">red</span>?)</p>
                 <button onclick="checkColor('red')">Қызыл (Красный)</button>
                 <button onclick="checkColor('blue')">Көк (Синий)</button>
                 <button onclick="checkColor('green')">Жасыл (Зелёный)</button>
                 <p id="color-feedback">Нәтиже көрсетіледі! (Результат появится!)</p>
             </div>
 
-            <!-- Дополнительный текст -->
+            <!-- Игра с животными -->
+            <div id="animal-game" class="game-card">
+                <h3>Таңдаңыз: Жануар табыңыз! (Выбери животное!)</h3>
+                <p id="animal-question">Бұл қай жануар? (Какое животное?)</p>
+                <button onclick="checkAnimal('cat')">Мысық (Кот)</button>
+                <button onclick="checkAnimal('dog')">Ит (Собака)</button>
+                <button onclick="checkAnimal('bird')">Құс (Птица)</button>
+                <p id="animal-feedback">Нәтиже көрсетіледі! (Результат появится!)</p>
+            </div>
+
             <p>Больше игр и материалов ждёт в <a href="digital-library.html">Digital кітапхана</a>!</p>
         </section>
     </main>
@@ -64,28 +73,18 @@
     <script type="module" src="firebase-init.js"></script>
     <script type="module" src="script.js" defer></script>
     <script>
+        // Переменные для игр
+        let correctColor = 'red';
+        let correctAnimal = 'cat';
+
+        // Функция для рандомизации цвета
+        function setRandomColor() {
+            const colors = ['red', 'blue', 'green'];
+            correctColor = colors[Math.floor(Math.random() * colors.length)];
+            const colorNames = { 'red': 'Қызыл (Красный)', 'blue': 'Көк (Синий)', 'green': 'Жасыл (Зелёный)' };
+            const colorNamesEn = { 'red': 'red', 'blue': 'blue', 'green': 'green' };
+            document.getElementById('correct-color').textContent = colorNames[correctColor];
+            document.getElementById('correct-color-en').textContent = colorNamesEn[correctColor];
+        }
+
         // Функция для проверки цвета
-        function checkColor(selected) {
-            const correctColor = 'red';
-            const feedback = document.getElementById('color-feedback');
-            if (selected === correctColor) {
-                feedback.textContent = 'Дұрыс! 🎉 Тағы да ойнайық! (Правильно! Давай ещё!)';
-                feedback.style.color = 'green';
-            } else {
-                feedback.textContent = 'Қате! Тағы тырысыңыз! (Неверно! Попробуй ещё!)';
-                feedback.style.color = 'red';
-            }
-        }
-
-        // Функции для переключения языка и меню (из script.js)
-        function setLanguage(lang) {
-            // Здесь можно добавить логику для переключения текста
-            console.log('Язык изменён на:', lang);
-        }
-
-        function toggleMenu() {
-            document.getElementById('nav-menu').classList.toggle('active');
-        }
-    </script>
-</body>
-</html>
